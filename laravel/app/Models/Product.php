@@ -9,7 +9,7 @@ class Product extends Model
 {
     protected $fillable = ['title', 'barcode'];
 
-    public function platformProdusts(): HasMany{
+    public function platformProducts(): HasMany{
         return $this->hasMany(PlatformProduct::class);
     }
 }
