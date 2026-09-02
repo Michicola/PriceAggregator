@@ -2,8 +2,9 @@
 
 namespace App\Services\Parsers;
 
+use App\Models\PlatformProduct;
+
 interface ParserStrategyInterface
 {
-    //The store's link is accepted as input, and an array of prices is returned.
-    public function parse(string $url): array;
+    public function parse(PlatformProduct $platformProduct): array;
 }
