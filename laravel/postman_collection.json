@@ -1,0 +1,96 @@
+{
+  "info": {
+    "_postman_id": "999de483-cb50-4d10-b620-b45985271359",
+    "name": "TestApi",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "27021756",
+    "_collection_link": "https://go.postman.co/collection/27021756-999de483-cb50-4d10-b620-b45985271359?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "200 OK - Получить все сущности (продукт-платформа-путь)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "200 ОК - Обновление данных",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/prices/update",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "prices",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "200 ОК - Аналитика",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products/123123123/analytics",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products",
+            "123123123",
+            "analytics"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "404 Not Found - Аналитика (товар не существует)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/products/123123/analytics",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "products",
+            "123123",
+            "analytics"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -10,6 +10,14 @@ class TOVStrategy implements ParserStrategyInterface
 {
     public function parse(PlatformProduct $platformProduct): array
     {   
+        if ($platformProduct->updated_at && $platformProduct->updated_at->isToday()) {
+        return [
+            'current_price' => (float)$platformProduct->current_price,
+            'old_price' => $platformProduct->old_price ? (float)$platformProduct->old_price : null,
+            'skipped' => true 
+        ];
+        }
+
         $url = $platformProduct->url;
         // 1. Download the HTML page of the product
         $response = Http::withoutVerifying()

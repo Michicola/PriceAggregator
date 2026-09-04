@@ -15,4 +15,9 @@ class PriceHistory extends Model
     public function platformProduct(): BelongsTo{
         return $this->belongsTo(PlatformProduct::class);
     }
+
+    protected function serializeDate(\DateTimeInterface $date): string
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }

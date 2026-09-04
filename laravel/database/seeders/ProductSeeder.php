@@ -30,26 +30,30 @@ class ProductSeeder extends Seeder
             'url' => 'https://www.wildberries.by/catalog/586364926/detail.aspx',
             'article_id' => '2415278',
             'current_price' => 58.23,
-            'old_price' => 130.26
+            'old_price' => 130.26,
+            'updated_at' => now()->subDay(), 
+            'created_at' => now()->subDay()
         ]);
 
         $mongeWB->priceHistories()->createMany([
-            ['price'=> 65.79, 'created_at'=>now()->subDays(2)],
-            ['price'=> 130.26, 'created_at'=>now()->subDays(1)],
-            ['price'=> 58.23, 'created_at'=>now()],
+            ['price'=> 65.79, 'created_at'=>now()->subDays(3)],
+            ['price'=> 130.26, 'created_at'=>now()->subDays(2)],
+            ['price'=> 58.23, 'created_at'=>now()->subDays(1)],
         ]);
 
         $monge21 = $monge->platformProducts()->create([
             'platform_id' => $twentyOneVek->id,
             'url' => 'https://www.21vek.by/cat_food/monoproteinsterilisedduck_monge_5999652.html',
             'current_price' => 55.50,
-            'old_price' => 57.12
+            'old_price' => 57.12,
+            'updated_at' => now()->subDay(), 
+            'created_at' => now()->subDay()
         ]);
 
         $monge21->priceHistories()->createMany([
-            ['price'=> 60.35, 'created_at'=>now()->subDays(2)],
-            ['price'=> 57.12, 'created_at'=>now()->subDays(1)],
-            ['price'=> 55.50, 'created_at'=>now()],
+            ['price'=> 60.35, 'created_at'=>now()->subDays(3)],
+            ['price'=> 57.12, 'created_at'=>now()->subDays(2)],
+            ['price'=> 55.50, 'created_at'=>now()->subDays(1)],
         ]);
         
         

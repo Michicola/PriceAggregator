@@ -28,4 +28,9 @@ class PlatformProduct extends Model
     public function priceHistories(): HasMany{
         return $this->hasMany(PriceHistory::class);
     }
+
+    protected function serializeDate(\DateTimeInterface $date): string
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }
