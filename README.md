@@ -25,15 +25,20 @@ The parser core is designed for seamless scalability, allowing new stores to be 
 ### 🐳 Quick Docker Setup
 To run a project on a computer, you only need a running Docker Desktop:
 
-1. **Start the containers (Web server will boot automatically):**
+1. **Navigate to the project root directory:**
+   ```bash
+   cd laravel
+   ```
+
+2. **Start the containers (Web server will boot automatically):**
    ```bash
    docker-compose up -d
    ```
-2. **Run migrations and populate seed data (loads historical test prices):**
+3. **Run migrations and populate seed data (loads historical test prices):**
    ```bash
    docker-compose exec app php artisan migrate:fresh --seed
    ```
-3. **Start the built-in Laravel network server:**
+4. **Start the built-in Laravel network server:**
    ```bash
    docker-compose exec -d app php artisan serve --host=0.0.0.0 --port=8000
 
@@ -60,18 +65,23 @@ Simply import the **`postman_collection.json`** file from the root folder direct
 * **Защита от спама:** Стратегии проверяют дату обновления через `isToday()`. Если товар сегодня уже обновлялся, повторный запрос блокируется (`status: skipped`).
 * **Автоматика:** Встроена консольная команда `php artisan prices:parse`, которая настроена на автоматический запуск через планировщик каждый день в `00:30` ночи.
 
-### 🐳 Быстрый запуск в 3 шага
+### 🐳 Быстрый запуск
 Для запуска проекта на компьютере необходим только запущенный Docker Desktop:
 
-1. **Поднимите контейнеры (веб-сервер включится сам):**
+1. **Перейдите в корневую папку проекта:**
+   ```bash
+   cd laravel
+   ```
+
+2. **Поднимите контейнеры (веб-сервер включится сам):**
    ```bash
    docker-compose up -d
    ```
-2. **Накатите базу данных и тестовые данные (сиды):**
+3. **Накатите базу данных и тестовые данные (сиды):**
    ```bash
    docker-compose exec app php artisan migrate:fresh --seed
    ```
-3. **Включите веб-сервер:**
+4. **Включите веб-сервер:**
    ```bash
    docker-compose exec -d app php artisan serve --host=0.0.0.0 --port=8000
    ```
