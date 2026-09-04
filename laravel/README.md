@@ -30,17 +30,18 @@ To run a project on a computer, you only need a running Docker Desktop:
    cd laravel
    ```
 
-2. **Start the containers (Web server will boot automatically):**
+2. **Start and build the containers:**
    ```bash
    docker-compose up -d
    ```
-3. **Run migrations and populate seed data (loads historical test prices):**
+3. **Install all project dependencies inside the container:**
+   ```bash
+   docker-compose exec app composer install
+   ```
+4. **Run migrations and populate seed data (loads historical test prices):**
    ```bash
    docker-compose exec app php artisan migrate:fresh --seed
    ```
-4. **Start the built-in Laravel network server:**
-   ```bash
-   docker-compose exec -d app php artisan serve --host=0.0.0.0 --port=8000
 
 The API is instantly live at: `http://localhost:8080/api/products`
 
@@ -77,15 +78,20 @@ Simply import the **`postman_collection.json`** file from the root folder direct
    ```bash
    docker-compose up -d
    ```
-3. **Накатите базу данных и тестовые данные (сиды):**
+3. **Установите все зависимости проекта внутри контейнера:**
+   ```bash
+   docker-compose exec app composer install
+   ```
+4. **Накатите базу данных и тестовые данные:**
    ```bash
    docker-compose exec app php artisan migrate:fresh --seed
-   ```
-4. **Включите веб-сервер:**
-   ```bash
-   docker-compose exec -d app php artisan serve --host=0.0.0.0 --port=8000
    ```
 Проект доступен по адресу: `http://localhost:8080/api/products`
 
 ### 📊 Тестирование в Postman
 Вам не нужно вбивать запросы руками. Импортируйте готовый файл **`postman_collection.json`** из корня проекта в свой Postman (`File -> Import`), и у вас появятся три настроенных запроса на порт `8080` (вывод кэша цен, запуск обновления и детальная аналитика товара с графиком).
+
+### 🧠 AI Collaboration Notice / Примечание об ИИ
+
+*   🇺🇸 **English:** This project was developed with the assistance of **Google AI**. The AI was utilized as a pair-programming partner to design the optimal Docker Desktop environment configurations, resolve local port/driver network conflicts, and accelerate infrastructure debugging.
+*   🇷🇺 **Русский:** Этот проект разработан при поддержке **Google AI**. Искусственный интеллект использовался в режиме парного программирования для оптимизации архитектуры Docker-контейнеров, устранения сетевых конфликтов портов/драйверов на Windows и ускоренного поиска инфраструктурных ошибок.

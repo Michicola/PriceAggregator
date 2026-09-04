@@ -1,10 +1,10 @@
 services:
-    # 1. Контейнер нашего API (Собирается по инструкции Dockerfile)
     app:
         build:
             context: .
             dockerfile_inline: |
                 FROM php:8.4-apache
+                COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
                 RUN apt-get update && apt-get install -y \
                     libpng-dev \
                     libonig-dev \
@@ -19,9 +19,9 @@ services:
                 WORKDIR /var/www/html
         container_name: monitor_app
         ports:
-            - "8080:80" # Запросы из Postman пойдут на порт 80 внутри Apache
+            - "8080:80" 
         volumes:
-            - .:/var/www/html # Зеркало вашего кода с Windows
+            - .:/var/www/html 
         environment:
             - DB_CONNECTION=mysql
             - DB_HOST=mysql_db
@@ -34,7 +34,6 @@ services:
         networks:
             - price-network
 
-    # 2. Контейнер базы данных MySQL 8.0
     mysql_db:
         image: mysql:8.0
         container_name: monitor_db
