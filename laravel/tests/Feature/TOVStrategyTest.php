@@ -6,7 +6,7 @@ use App\Models\Platform;
 use App\Models\PlatformProduct;
 use App\Models\Product;
 use App\Services\Parsers\TOVStrategy;
-use Http;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
