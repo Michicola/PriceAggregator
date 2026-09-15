@@ -5,6 +5,7 @@ namespace App\Services\Parsers;
 use App\Models\PlatformProduct;
 use Exception;
 use Http;
+use Symfony\Component\DomCrawler\Crawler;
 
 class TOVStrategy implements ParserStrategyInterface
 {
@@ -35,18 +36,34 @@ class TOVStrategy implements ParserStrategyInterface
 
         $html = $response->body();
 
-        // 2. Cut out the price 
-        preg_match('/"price":\s*"?([\d\.]+)"?/', $html, $priceMatches);
-        preg_match('/"price_old":\s*"?([\d\.]+)"?/', $html, $oldPriceMatches);
+         // 2. Turning html into a tag tree
+        $crawler = new Crawler($html);
 
-        $currentPrice = isset($priceMatches[1]) ? (float)$priceMatches[1] : null;
-        $oldPrice = isset($oldPriceMatches[1]) ? (float)$oldPriceMatches[1] : null;
+        $currentPrice = null;
+        $oldPrice = null;
+
+        $crawler->filter('script[type="application/ld+json"]')
+            ->each(function (Crawler $node) use (&$currentPrice, &$oldPrice) {
+            if (!is_null($currentPrice)) {
+                return;
+            }
+
+            $jsonData = json_decode($node->text(), true);
+
+            //Checks that the text has turned into an array without errors
+            //Checks if the word price is in the array
+            if (json_last_error() === JSON_ERROR_NONE && isset($jsonData['price'])) {
+                //3. Assigning values to variables
+                $currentPrice = (float)$jsonData['price'];
+                $oldPrice = isset($jsonData['price_old']) ? (float)$jsonData['price_old'] : null;
+            }
+        });
 
         if (is_null($currentPrice)) {
             throw new Exception("Page 21vek was downloaded successfully, but the price tag could not be found");
         }
 
-        // 3. Returning the data structure
+        // 4. Returning the data structure
         return [
             'current_price' => $currentPrice,
             'old_price' => $oldPrice

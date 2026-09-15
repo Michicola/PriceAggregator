@@ -15,7 +15,7 @@ The parser core is designed for seamless scalability, allowing new stores to be 
 * 👩‍💻 **`ParserStrategyInterface`** — Defines a strict contract for all marketplace crawlers.
 * 🕹 **`PriceParserManager`** — A central dispatcher that analyzes the product URL and dynamically triggers the correct strategy by matching the domain string.
 * ⚙️ **Parsed Platforms:**
-  * `21vek` (`TOVStrategy`) — Performs live HTML scraping using regular expressions.
+  * `21vek` (`TOVStrategy`) — Downloads the product page and uses **Symfony DomCrawler** to  find and read prices inside the HTML code.
   * `Wildberries` (`WBStrategy`) — Simulates price fluctuations via a dynamic mathematical trend loop based on database history.
 
 ### ⏱️ Business Logic Features
@@ -59,7 +59,7 @@ Simply import the **`postman_collection.json`** file from the root folder direct
 * 👩‍💻 **`ParserStrategyInterface`** — задает общий стандарт для всех парсеров.
 * 🕹 **`PriceParserManager`** — диспетчер, который анализирует URL товара и выбирает нужный парсер (по совпадению домена в ссылке).
 * ⚙️ **Парсеры:**
-  * `TOVStrategy` (21vek) — парсит живой HTML-код сайта через регулярные выражения.
+  * `TOVStrategy` (21vek) — скачивает страницу товара и через **Symfony DomCrawler** находит цены в HTML-коде.
   * `WBStrategy` (Wildberries) — симулирует изменение цен по математической формуле на основе истории БД.
 
 ### ⏱️ Особенности бизнес-логики

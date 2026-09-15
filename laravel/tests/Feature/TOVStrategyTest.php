@@ -40,6 +40,8 @@ class TOVStrategyTest extends TestCase
             'base_url' => 'https://21vek.by'
         ]);
 
+        $this->travelTo(now()->subDay());
+
         $platformProduct = PlatformProduct::create([
             'product_id' => $product->id,
             'platform_id' => $platform->id,
@@ -47,6 +49,8 @@ class TOVStrategyTest extends TestCase
             'current_price' => 50.00,
             'old_price' => null
         ]);
+
+        $this->travelBack();
 
         $strategy = new TOVStrategy();
         $result = $strategy->parse($platformProduct);
